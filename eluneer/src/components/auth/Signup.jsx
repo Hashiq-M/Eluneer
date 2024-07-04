@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -91,11 +92,11 @@ const Signup = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <a href="#"> Sign Up</a>
+                  <Link to="#"> Sign Up</Link>
                 </motion.button>
               </form>
               <div className="mt-4">
-                <a href="#">
+                <Link to="#">
                   <motion.button
                     className="w-full flex items-center justify-center border border-gray-300 py-2 rounded-lg transition-transform duration-300 hover:border-white font-semibold text-text"
                     whileHover={{ scale: 1.05 }}
@@ -104,7 +105,7 @@ const Signup = () => {
                     <FcGoogle size={20} className="mr-2" />
                     Sign in with Google
                   </motion.button>
-                </a>
+                </Link>
               </div>
               <motion.p
                 className="mt-4 text-center text-text text-sm"
