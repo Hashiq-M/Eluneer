@@ -113,9 +113,12 @@ const Signup = () => {
                 transition={{ duration: 1, delay: 0.5 }}
               >
                 Already have an account?
-                <a href="/login" className="text-cyan-500 ml-4 hover:underline">
+                <Link
+                  to="/login"
+                  className="text-cyan-500 ml-4 hover:underline"
+                >
                   Login
-                </a>
+                </Link>
               </motion.p>
             </div>
           </motion.div>
