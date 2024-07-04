@@ -1,5 +1,6 @@
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -55,9 +56,9 @@ const Hero = () => {
             whileHover={{ x: 10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <a href="/login">
+            <Link to="/login">
               <FaArrowRight size={40} className="text-text" />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </motion.div>

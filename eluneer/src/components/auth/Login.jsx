@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -89,9 +90,9 @@ const Login = () => {
                     <input type="checkbox" className="form-checkbox" />
                     <span className="ml-2">Remember me</span>
                   </label>
-                  <a href="#" className="text-sm hover:underline">
+                  <Link to="#" className="text-sm hover:underline">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <motion.button
                   type="submit"
@@ -99,11 +100,11 @@ const Login = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <a href="#"> Login</a>
+                  <Link to="#"> Login</Link>
                 </motion.button>
               </form>
               <div className="mt-4">
-                <a href="#">
+                <Link to="#">
                   <motion.button
                     className="w-full flex items-center justify-center border border-gray-300 py-2 rounded-lg transition-transform duration-300 hover:border-white font-semibold text-text"
                     whileHover={{ scale: 1.05 }}
@@ -112,7 +113,7 @@ const Login = () => {
                     <FcGoogle size={20} className="mr-2" />
                     Sign in with Google
                   </motion.button>
-                </a>
+                </Link>
               </div>
               <motion.p
                 className="mt-4 text-center text-text text-sm"
@@ -121,15 +122,15 @@ const Login = () => {
                 transition={{ duration: 1, delay: 0.5 }}
               >
                 Don&apos;t have an account?
-                <a
-                  href="/signup"
+                <Link
+                  to="/signup"
                   className="text-cyan-500 ml-4 hover:underline"
                 >
                   Sign up for free!
-                </a>
+                </Link>
               </motion.p>
             </div>
-          </motion.div>{" "}
+          </motion.div>
           {/* content and form div */}
         </div>
       </div>
