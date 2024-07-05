@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { RxPencil2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { IoIosLogOut } from "react-icons/io";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const Add = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleProfileClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className="bg-bg min-h-screen relative">
       <motion.div
@@ -40,9 +49,22 @@ const Add = () => {
         className="text-text text-xl absolute top-20 left-24"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        onClick={handleProfileClick}
       >
         <CgProfile size={40} />
       </motion.button>
+      {isDropdownOpen && (
+        <div className="absolute left-[18%] top-36 bg-white border rounded-lg shadow-lg z-10">
+          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <IoIosLogOut className="inline-block mr-2" /> Logout
+          </div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
+          </div>
+        </div>
+      )}
 
       <motion.div
         className="absolute inset-0 text-center flex flex-col justify-center items-center"

@@ -4,6 +4,7 @@ import Signup from "./components/auth/Signup";
 import Hero from "./components/Hero";
 import Bookform from "./components/Bookform";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Books from "./components/Books";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/newbooks" element={<Add />} />
         <Route path="/bookform" element={<Bookform />} />
+        <Route path="/books" element={<Books />} />
       </Routes>
     </BrowserRouter>
   );

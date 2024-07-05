@@ -6,4 +6,8 @@
 .shadow-custom {
     box-shadow: -20px -20px 30px 0px silver, 20px 20px 30px 0px silver;
   }
-  
+
+
+.box {
+  box-shadow: -3px -3px 5px 0px silver, 3px 3px 3px 0px silver;
+}

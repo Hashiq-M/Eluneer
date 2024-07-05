@@ -4,10 +4,21 @@ import { RxDoubleArrowLeft } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { useState } from "react";
+import { IoIosLogOut } from "react-icons/io";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const Bookform = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleProfileClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   const [uploadedImageName, setUploadedImageName] = useState(""); // State to hold uploaded image name
   const [uploadedPdfName, setUploadedPdfName] = useState(""); // State to hold uploaded PDF name
+  const handleSubmit = () => {
+    // Add your form submission logic here
+    console.log("Form submitted!");
+  };
 
   // Function to handle image upload
   const handleImgUpload = (event) => {
@@ -59,9 +70,22 @@ const Bookform = () => {
         className="text-text text-xl absolute top-32 right-48"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        onClick={handleProfileClick}
       >
         <CgProfile size={40} />
       </motion.button>
+      {isDropdownOpen && (
+        <div className="absolute right-[18%] top-36 bg-white border rounded-lg shadow-lg z-10">
+          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <IoIosLogOut className="inline-block mr-2" /> Logout
+          </div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
+          </div>
+        </div>
+      )}
 
       <div className="flex justify-start w-full pl-40 pt-10">
         <div className="relative">
@@ -179,7 +203,7 @@ const Bookform = () => {
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="upload-logo"
                   >
-                    LOGO:
+                    LOGO :
                   </label>
                   <input
                     type="file"
@@ -221,6 +245,7 @@ const Bookform = () => {
           className="bg-transparent ml-16 text-black bg-white text-lg py-2 px-4 rounded-2xl"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          onClick={handleSubmit}
         >
           SAVE
         </motion.button>
