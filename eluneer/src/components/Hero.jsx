@@ -1,4 +1,4 @@
-import { FaArrowRight } from "react-icons/fa";
+import { RxDoubleArrowRight } from "react-icons/rx";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -57,7 +57,7 @@ const Hero = () => {
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <Link to="/login">
-              <FaArrowRight size={40} className="text-text" />
+              <RxDoubleArrowRight size={40} className="text-text" />
             </Link>
           </motion.div>
         </motion.div>

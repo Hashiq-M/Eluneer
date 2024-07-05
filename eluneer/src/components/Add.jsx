@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { RxPencil2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 const Add = () => {
   return (
     <div className="bg-bg min-h-screen relative">
@@ -33,6 +34,9 @@ const Add = () => {
       >
         The Flow of Stories
       </motion.h1>
+      <button className="text-text text-xl absolute top-20  left-24">
+        <CgProfile size={40} />
+      </button>
 
       <motion.div
         className="absolute inset-0 text-center flex flex-col justify-center items-center"
