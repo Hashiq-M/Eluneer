@@ -3,8 +3,27 @@ import { CgProfile } from "react-icons/cg";
 import { RxDoubleArrowLeft } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
+import { useState } from "react";
 
 const Bookform = () => {
+  const [uploadedImageName, setUploadedImageName] = useState(""); // State to hold uploaded image name
+  const [uploadedPdfName, setUploadedPdfName] = useState(""); // State to hold uploaded PDF name
+
+  // Function to handle image upload
+  const handleImgUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedImageName(file.name);
+    }
+  };
+
+  // Function to handle PDF upload
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedPdfName(file.name);
+    }
+  };
   return (
     <div className="bg-bg min-h-screen relative">
       <motion.div
@@ -156,16 +175,31 @@ const Bookform = () => {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.8 }}
                 >
-                  <label className="text-text text-lg mr-2 w-28" htmlFor="logo">
+                  <label
+                    className="text-text text-lg mr-2 w-28"
+                    htmlFor="upload-logo"
+                  >
                     LOGO:
                   </label>
-                  <input type="file" id="logo" className="hidden" />
-                  <label
-                    htmlFor="upload-pdf"
-                    className="bg-transparent text-black  bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
+                  <input
+                    type="file"
+                    id="upload-logo"
+                    className="hidden"
+                    onChange={handleImgUpload} // Handle image upload
+                  />
+                  <motion.label
+                    htmlFor="upload-logo"
+                    className="bg-transparent text-black ml-36 bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     <SlCloudUpload size={20} className="mr-2" /> UPLOAD
-                  </label>
+                  </motion.label>
+                  {uploadedImageName && (
+                    <div className="ml-4 text-text text-lg">
+                      {uploadedImageName}
+                    </div>
+                  )}
                 </motion.div>
               </form>
             </div>
@@ -190,7 +224,20 @@ const Bookform = () => {
         >
           SAVE
         </motion.button>
-        <input type="file" accept=".pdf" className="hidden" id="upload-pdf" />
+        <input
+          type="file"
+          accept=".pdf"
+          id="upload-pdf"
+          className="hidden"
+          onChange={handleFileUpload}
+        />
+        <input
+          type="file"
+          accept=".pdf"
+          id="upload-pdf"
+          className="hidden"
+          onChange={handleFileUpload} // Handle PDF upload
+        />
         <motion.label
           htmlFor="upload-pdf"
           className="bg-transparent text-black ml-36 bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
@@ -199,6 +246,9 @@ const Bookform = () => {
         >
           <SlCloudUpload size={20} className="mr-2" /> UPLOAD
         </motion.label>
+        {uploadedPdfName && (
+          <div className="ml-4 text-text text-lg">{uploadedPdfName}</div>
+        )}
       </motion.div>
       <motion.h1
         className="text-text pl-[36%]"
