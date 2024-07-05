@@ -8,6 +8,9 @@ export default {
         text: "#FCF8E8",
         bar: "#FFFCDF",
       },
+      fontFamily: {
+        jimnightshade: ["Jim Nightshade", "cursive"],
+      },
     },
   },
   plugins: [],

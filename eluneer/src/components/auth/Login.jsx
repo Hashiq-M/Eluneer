@@ -18,7 +18,7 @@ const Login = () => {
         transition={{ duration: 0.5, delay: 0.1 }}
       ></motion.div>
       <motion.h1
-        className="text-text text-4xl font-semibold tracking-[.3em] ml-44 mt-8 absolute top-0"
+        className="text-text text-7xl font-semibold tracking-[.3em] ml-44 mt-8 absolute top-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -97,17 +97,15 @@ const Login = () => {
                 <motion.button
                   type="submit"
                   className="w-full bg-white text-black py-2 rounded-md transition-transform duration-300 hover:bg-slate-100 font-semibold"
-                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="#"> Login</Link>
+                  <Link to="/newbooks"> Login</Link>
                 </motion.button>
               </form>
               <div className="mt-4">
                 <Link to="#">
                   <motion.button
                     className="w-full flex items-center justify-center border border-gray-300 py-2 rounded-lg transition-transform duration-300 hover:border-white font-semibold text-text"
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <FcGoogle size={20} className="mr-2" />
