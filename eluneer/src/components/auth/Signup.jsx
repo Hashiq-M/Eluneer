@@ -1,8 +1,56 @@
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    return email.endsWith("@gmail.com");
+  };
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regex.test(password);
+  };
+
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+    setIsFormValid(validateEmail(email) && validatePassword(password));
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid Gmail address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+    setIsFormValid(validateEmail(email) && validatePassword(password));
+    if (!validatePassword(password)) {
+      setPasswordError("Please enter both numbers & alphabets.");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    if (isValid) {
+      alert("Signup successfully!");
+      navigate("/books");
+    }
+  };
+
   return (
     <div className="bg-bg min-h-screen flex items-center">
       <motion.div
@@ -56,7 +104,7 @@ const Signup = () => {
               >
                 Welcome back! Please enter your details.
               </motion.p>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4 text-text">
                   <label
                     className="block text-sm font-medium mb-2"
@@ -69,7 +117,12 @@ const Signup = () => {
                     id="email"
                     className="w-full px-3 py-2 rounded-lg bg-transparent border border-gray-300 focus:outline-none"
                     placeholder="Enter your email"
+                    value={email}
+                    onChange={handleEmailChange}
                   />
+                  {emailError && (
+                    <p className="text-red-500 text-sm mt-0">{emailError}</p>
+                  )}
                 </div>
                 <div className="mb-4 text-text">
                   <label
@@ -83,15 +136,25 @@ const Signup = () => {
                     id="password"
                     className="w-full px-3 py-2 bg-transparent rounded-lg border border-gray-300 focus:outline-none"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={handlePasswordChange}
                   />
+                  {passwordError && (
+                    <p className="text-red-500 text-sm mt-0">{passwordError}</p>
+                  )}
                 </div>
 
                 <motion.button
                   type="submit"
-                  className="w-full bg-white text-black py-2 rounded-md transition-transform duration-300 hover:bg-slate-100 font-semibold"
-                  whileTap={{ scale: 0.95 }}
+                  className={`w-full py-2 rounded-md transition-transform duration-300 font-semibold ${
+                    isFormValid
+                      ? "bg-white text-black hover:bg-slate-100"
+                      : "bg-gray-400 text-gray-700 cursor-not-allowed"
+                  }`}
+                  whileTap={isFormValid ? { scale: 0.95 } : {}}
+                  disabled={!isFormValid}
                 >
-                  <Link to="#"> Sign Up</Link>
+                  Sign Up
                 </motion.button>
               </form>
               <div className="mt-4">
