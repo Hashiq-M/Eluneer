@@ -50,7 +50,7 @@ const Add = () => {
         </motion.h1>
 
         <Link
-          to="/books"
+          to="/bookform"
           className="text-black text-5xl  bg-bar border mb-20 border-gray-300 pl-7 pr-8 py-4 rounded-2xl shadow-custom"
         >
           <RxPencil2 size={100} />

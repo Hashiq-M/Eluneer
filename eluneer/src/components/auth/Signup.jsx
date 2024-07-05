@@ -47,7 +47,7 @@ const Signup = () => {
 
     if (isValid) {
       alert("Signup successfully!");
-      navigate("/books");
+      navigate("/newbooks");
     }
   };
 
