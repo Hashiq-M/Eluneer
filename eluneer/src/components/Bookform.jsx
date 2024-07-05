@@ -8,18 +8,17 @@ const Bookform = () => {
   return (
     <div className="bg-bg min-h-screen relative">
       <motion.div
-        className="absolute right-0 top-0 bottom-0 w-14 bg-bar"
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.5 }}
-      ></motion.div>
-      <motion.div
         className="absolute right-20 top-0 bottom-0 w-14 bg-bar"
         initial={{ x: 100 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
       ></motion.div>
-
+      <motion.div
+        className="absolute right-0 top-0 bottom-0 w-14 bg-bar"
+        initial={{ x: 100 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 0.5 }}
+      ></motion.div>
       <motion.h1
         className="text-text text-4xl font-semibold tracking-[.3em] absolute top-8 right-44"
         initial={{ opacity: 0 }}
@@ -37,9 +36,13 @@ const Bookform = () => {
         The Flow of Stories
       </motion.h1>
 
-      <button className="text-text text-xl absolute top-32 right-48">
+      <motion.button
+        className="text-text text-xl absolute top-32 right-48"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
         <CgProfile size={40} />
-      </button>
+      </motion.button>
 
       <div className="flex justify-start w-full pl-40 pt-10">
         <div className="relative">
@@ -57,7 +60,12 @@ const Bookform = () => {
           >
             <div className="content z-10">
               <form>
-                <div className="mb-4 flex items-center">
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
                   <label
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="bookId"
@@ -69,8 +77,13 @@ const Bookform = () => {
                     id="bookId"
                     className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                   />
-                </div>
-                <div className="mb-4 flex items-center">
+                </motion.div>
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
                   <label
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="title"
@@ -82,8 +95,13 @@ const Bookform = () => {
                     id="title"
                     className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                   />
-                </div>
-                <div className="mb-4 flex items-center">
+                </motion.div>
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
                   <label
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="author"
@@ -95,8 +113,13 @@ const Bookform = () => {
                     id="author"
                     className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                   />
-                </div>
-                <div className="mb-4 flex items-center">
+                </motion.div>
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
                   <label
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="publicationDate"
@@ -108,8 +131,13 @@ const Bookform = () => {
                     id="publicationDate"
                     className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                   />
-                </div>
-                <div className="mb-4 flex items-center">
+                </motion.div>
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                >
                   <label
                     className="text-text text-lg mr-2 w-28"
                     htmlFor="language"
@@ -121,8 +149,13 @@ const Bookform = () => {
                     id="language"
                     className="w-full px-10 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                   />
-                </div>
-                <div className="mb-4 flex items-center">
+                </motion.div>
+                <motion.div
+                  className="mb-4 flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                >
                   <label className="text-text text-lg mr-2 w-28" htmlFor="logo">
                     LOGO:
                   </label>
@@ -133,32 +166,48 @@ const Bookform = () => {
                   >
                     <SlCloudUpload size={20} className="mr-2" /> UPLOAD
                   </label>
-                </div>
+                </motion.div>
               </form>
             </div>
           </motion.div>
           {/* content and form div */}
         </div>
       </div>
-      <div className="ml-[10%] mt-16 flex items-center">
+      <motion.div
+        className="ml-[10%] mt-16 flex items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.9 }}
+      >
         <Link to="#">
           <RxDoubleArrowLeft size={50} className="text-text" />
         </Link>
-        <button
+        <motion.button
           type="button"
           className="bg-transparent ml-16 text-black bg-white text-lg py-2 px-4 rounded-2xl"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           SAVE
-        </button>
+        </motion.button>
         <input type="file" accept=".pdf" className="hidden" id="upload-pdf" />
-        <label
+        <motion.label
           htmlFor="upload-pdf"
           className="bg-transparent text-black ml-36 bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <SlCloudUpload size={20} className="mr-2" /> UPLOAD
-        </label>
-      </div>
-      <h1 className="text-text pl-[36%]">BOOK PDF</h1>
+        </motion.label>
+      </motion.div>
+      <motion.h1
+        className="text-text pl-[36%]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        BOOK PDF
+      </motion.h1>
     </div>
   );
 };
