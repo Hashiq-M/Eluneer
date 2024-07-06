@@ -1,3 +1,4 @@
+//landing page
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";

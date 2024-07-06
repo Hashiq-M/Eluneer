@@ -1,3 +1,4 @@
+//to get book input from user
 import { motion } from "framer-motion";
 import { CgProfile } from "react-icons/cg";
 import { RxDoubleArrowLeft } from "react-icons/rx";
@@ -172,7 +173,7 @@ const Bookform = () => {
         className="ml-[10%] mt-16 flex items-center"
         {...animations.fadeIn(0.9)}
       >
-        <Link to="#">
+        <Link to="/books">
           <RxDoubleArrowLeft size={50} className="text-text" />
         </Link>
         <motion.button

@@ -1,10 +1,12 @@
+//every routes
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Add from "./components/Add";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Hero from "./components/Hero";
 import Bookform from "./components/Bookform";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Books from "./components/Books";
+import BookDetails from "./components/BookDetails";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/newbooks" element={<Add />} />
         <Route path="/bookform" element={<Bookform />} />
         <Route path="/books" element={<Books />} />
+        <Route path="/book/:id" element={<BookDetails />} />
       </Routes>
     </BrowserRouter>
   );

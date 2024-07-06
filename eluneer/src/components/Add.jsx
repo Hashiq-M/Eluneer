@@ -1,3 +1,4 @@
+//first page when logged in or signed up
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { RxPencil2 } from "react-icons/rx";

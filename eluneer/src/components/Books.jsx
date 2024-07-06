@@ -1,46 +1,30 @@
-import { useState } from "react";
+//to list every book
+import { useState, useEffect } from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BsPlusLg } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Books = () => {
+  const [books, setBooks] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const books = [
-    {
-      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
-      title: "HOUSE OF THE DRAGONS",
-      author: "GEORGE R.R MARTIN",
-      id: 1,
-    },
-    {
-      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
-      title: "HOUSE OF THE DRAGONS",
-      author: "GEORGE R.R MARTIN",
-      id: 2,
-    },
-    {
-      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
-      title: "HOUSE OF THE DRAGONS",
-      author: "GEORGE R.R MARTIN",
-      id: 3,
-    },
-    {
-      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
-      title: "HOUSE OF THE DRAGONS",
-      author: "GEORGE R.R MARTIN",
-      id: 4,
-    },
-    {
-      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
-      title: "HOUSE OF THE DRAGONS",
-      author: "GEORGE R.R MARTIN",
-      id: 5,
-    },
-    // Add more book objects as needed
-  ];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/books");
+        const data = await response.json();
+        setBooks(data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
 
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -113,6 +97,7 @@ const Books = () => {
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate(`/book/${book._id}`)}
             >
               <img
                 src={book.logo}
