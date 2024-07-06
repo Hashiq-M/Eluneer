@@ -15,6 +15,30 @@ const Books = () => {
       author: "GEORGE R.R MARTIN",
       id: 1,
     },
+    {
+      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
+      title: "HOUSE OF THE DRAGONS",
+      author: "GEORGE R.R MARTIN",
+      id: 2,
+    },
+    {
+      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
+      title: "HOUSE OF THE DRAGONS",
+      author: "GEORGE R.R MARTIN",
+      id: 3,
+    },
+    {
+      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
+      title: "HOUSE OF THE DRAGONS",
+      author: "GEORGE R.R MARTIN",
+      id: 4,
+    },
+    {
+      logo: "https://preview.redd.it/understanding-fire-and-blood-the-book-vs-hotd-the-show-i-v0-3ub585fawgsa1.jpg?width=640&crop=smart&auto=webp&s=84bfdef1b88a676a191f0a5fb79e8cd9068dc4bb",
+      title: "HOUSE OF THE DRAGONS",
+      author: "GEORGE R.R MARTIN",
+      id: 5,
+    },
     // Add more book objects as needed
   ];
 
@@ -62,7 +86,12 @@ const Books = () => {
         <CgProfile size={40} />
       </motion.button>
       {isDropdownOpen && (
-        <div className="absolute right-[18%] top-36 bg-white border rounded-lg shadow-lg z-10">
+        <motion.div
+          className="absolute right-[17%] top-36 bg-white border rounded-lg shadow-lg z-10"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
           <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
           <div className="block px-4 py-2 hover:bg-gray-200">
@@ -71,25 +100,34 @@ const Books = () => {
           <div className="block px-4 py-2 hover:bg-gray-200">
             <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
           </div>
-        </div>
+        </motion.div>
       )}
-      <div className="ml-4 w-2/3 ">
-        <div className="grid grid-cols-2 gap-4 p-5 pt-[8%]">
+      <div className="ml-4 w-[70%]">
+        <div className="grid grid-cols-2 gap-10 p-5 pt-[8%]">
           {books.map((book) => (
-            <div
+            <motion.div
               key={book.id}
-              className="bg-bg p-4 flex items-center justify-center border rounded-lg"
+              className="bg-gradient-to-b from-bg via-cyan-800 to-bg p-7 flex items-center justify-center rounded-lg shadow-[rgba(0,0,15,0.5)_10px_10px_4px_0px]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <img
                 src={book.logo}
                 alt="LOGO"
-                className="w-20 h-20 rounded-full mb-4 object-cover bg-gray-300 mr-4"
+                className="w-24 h-24 rounded-full object-cover bg-gray-300 mr-4"
               />
               <div className="flex flex-col">
-                <div className="text-xl font-bold mb-2">{book.title}</div>
-                <div className="text-lg">{book.author}</div>
+                <div className="text-lg font-serif font-bold mb-2">
+                  {book.title}
+                </div>
+                <div className="text-lg font-serif font-bold">
+                  {book.author}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

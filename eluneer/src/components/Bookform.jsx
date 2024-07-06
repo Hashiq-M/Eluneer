@@ -7,65 +7,65 @@ import { useState } from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
+const animations = {
+  slideIn: (delay = 0) => ({
+    initial: { x: 100 },
+    animate: { x: 0 },
+    transition: { duration: 0.5, delay },
+  }),
+  fadeIn: (delay = 0) => ({
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 1, delay },
+  }),
+  scaleIn: (delay = 0) => ({
+    initial: { scale: 0.8 },
+    animate: { scale: 1 },
+    transition: { duration: 0.5, delay },
+  }),
+};
+
 const Bookform = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [uploadedImageName, setUploadedImageName] = useState("");
+  const [uploadedPdfName, setUploadedPdfName] = useState("");
 
-  const handleProfileClick = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-  const [uploadedImageName, setUploadedImageName] = useState(""); // State to hold uploaded image name
-  const [uploadedPdfName, setUploadedPdfName] = useState(""); // State to hold uploaded PDF name
-  const handleSubmit = () => {
-    // Add your form submission logic here
-    console.log("Form submitted!");
-  };
+  const handleProfileClick = () => setIsDropdownOpen(!isDropdownOpen);
 
-  // Function to handle image upload
   const handleImgUpload = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setUploadedImageName(file.name);
-    }
+    if (file) setUploadedImageName(file.name);
   };
 
-  // Function to handle PDF upload
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setUploadedPdfName(file.name);
-    }
+    if (file) setUploadedPdfName(file.name);
   };
+
+  const handleSubmit = () => console.log("Form submitted!");
+
   return (
     <div className="bg-bg min-h-screen relative">
       <motion.div
         className="absolute right-20 top-0 bottom-0 w-14 bg-bar"
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        {...animations.slideIn(0.1)}
       ></motion.div>
       <motion.div
         className="absolute right-0 top-0 bottom-0 w-14 bg-bar"
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.5 }}
+        {...animations.slideIn()}
       ></motion.div>
       <motion.h1
         className="text-text text-4xl font-semibold tracking-[.3em] absolute top-8 right-44"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        {...animations.fadeIn()}
       >
         ELUNEER
       </motion.h1>
       <motion.h1
         className="text-text text-xl absolute top-20 right-48"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        {...animations.fadeIn()}
       >
         The Flow of Stories
       </motion.h1>
-
       <motion.button
         className="text-text text-xl absolute top-32 right-48"
         whileHover={{ scale: 1.1 }}
@@ -75,7 +75,12 @@ const Bookform = () => {
         <CgProfile size={40} />
       </motion.button>
       {isDropdownOpen && (
-        <div className="absolute right-[18%] top-36 bg-white border rounded-lg shadow-lg z-10">
+        <motion.div
+          className="absolute right-[18%] top-36 bg-white border rounded-lg shadow-lg z-10"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
           <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
           <div className="block px-4 py-2 hover:bg-gray-200">
@@ -84,123 +89,55 @@ const Bookform = () => {
           <div className="block px-4 py-2 hover:bg-gray-200">
             <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
           </div>
-        </div>
+        </motion.div>
       )}
-
       <div className="flex justify-start w-full pl-40 pt-10">
         <div className="relative">
           <motion.div
             className="bg-opacity-20 bg-cyan-500 p-20 min-h-full min-w-full rounded-xl shadow-2xl drop-shadow-2xl absolute top-8 left-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            {...animations.fadeIn(0.2)}
           ></motion.div>
           <motion.div
             className="bg-opacity-20 bg-cyan-500 pl-16 pt-12 pr-5 pb-3 rounded-xl shadow-2xl drop-shadow-2xl relative"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
+            {...animations.scaleIn()}
           >
             <div className="content z-10">
               <form>
-                <motion.div
-                  className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <label
-                    className="text-text text-lg mr-2 w-28"
-                    htmlFor="bookId"
+                {[
+                  { label: "BOOK ID :", id: "bookId", delay: 0.3 },
+                  { label: "TITLE :", id: "title", delay: 0.4 },
+                  { label: "AUTHOR :", id: "author", delay: 0.5 },
+                  {
+                    label: "PUBLICATION DATE :",
+                    id: "publicationDate",
+                    delay: 0.6,
+                  },
+                  { label: "LANGUAGE:", id: "language", delay: 0.7 },
+                ].map((field) => (
+                  <motion.div
+                    className="mb-4 flex items-center"
+                    {...animations.fadeIn(field.delay)}
+                    key={field.id}
                   >
-                    BOOK ID :
-                  </label>
-                  <input
-                    type="text"
-                    id="bookId"
-                    className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
-                  />
-                </motion.div>
+                    <label
+                      className="text-text text-lg mr-2 w-28"
+                      htmlFor={field.id}
+                    >
+                      {field.label}
+                    </label>
+                    <input
+                      type="text"
+                      id={field.id}
+                      className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
+                    />
+                  </motion.div>
+                ))}
                 <motion.div
                   className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
+                  {...animations.fadeIn(0.8)}
                 >
                   <label
-                    className="text-text text-lg mr-2 w-28"
-                    htmlFor="title"
-                  >
-                    TITLE :
-                  </label>
-                  <input
-                    type="text"
-                    id="title"
-                    className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
-                  />
-                </motion.div>
-                <motion.div
-                  className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  <label
-                    className="text-text text-lg mr-2 w-28"
-                    htmlFor="author"
-                  >
-                    AUTHOR :
-                  </label>
-                  <input
-                    type="text"
-                    id="author"
-                    className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
-                  />
-                </motion.div>
-                <motion.div
-                  className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <label
-                    className="text-text text-lg mr-2 w-28"
-                    htmlFor="publicationDate"
-                  >
-                    PUBLICATION DATE :
-                  </label>
-                  <input
-                    type="text"
-                    id="publicationDate"
-                    className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
-                  />
-                </motion.div>
-                <motion.div
-                  className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                  <label
-                    className="text-text text-lg mr-2 w-28"
-                    htmlFor="language"
-                  >
-                    LANGUAGE:
-                  </label>
-                  <input
-                    type="text"
-                    id="language"
-                    className="w-full px-10 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
-                  />
-                </motion.div>
-                <motion.div
-                  className="mb-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                >
-                  <label
-                    className="text-text text-lg mr-2 w-28"
+                    className="text-text text-lg mr-2 w-32"
                     htmlFor="upload-logo"
                   >
                     LOGO :
@@ -209,13 +146,14 @@ const Bookform = () => {
                     type="file"
                     id="upload-logo"
                     className="hidden"
-                    onChange={handleImgUpload} // Handle image upload
+                    onChange={handleImgUpload}
                   />
                   <motion.label
                     htmlFor="upload-logo"
                     className="bg-transparent text-black ml-36 bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
+                    {...animations.fadeIn(0.9)}
                   >
                     <SlCloudUpload size={20} className="mr-2" /> UPLOAD
                   </motion.label>
@@ -228,14 +166,11 @@ const Bookform = () => {
               </form>
             </div>
           </motion.div>
-          {/* content and form div */}
         </div>
       </div>
       <motion.div
         className="ml-[10%] mt-16 flex items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.9 }}
+        {...animations.fadeIn(0.9)}
       >
         <Link to="#">
           <RxDoubleArrowLeft size={50} className="text-text" />
@@ -246,6 +181,7 @@ const Bookform = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleSubmit}
+          {...animations.fadeIn(0.9)}
         >
           SAVE
         </motion.button>
@@ -256,18 +192,12 @@ const Bookform = () => {
           className="hidden"
           onChange={handleFileUpload}
         />
-        <input
-          type="file"
-          accept=".pdf"
-          id="upload-pdf"
-          className="hidden"
-          onChange={handleFileUpload} // Handle PDF upload
-        />
         <motion.label
           htmlFor="upload-pdf"
           className="bg-transparent text-black ml-36 bg-white text-lg p-2 rounded-2xl cursor-pointer flex items-center"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          {...animations.fadeIn(0.9)}
         >
           <SlCloudUpload size={20} className="mr-2" /> UPLOAD
         </motion.label>
@@ -275,12 +205,7 @@ const Bookform = () => {
           <div className="ml-4 text-text text-lg">{uploadedPdfName}</div>
         )}
       </motion.div>
-      <motion.h1
-        className="text-text pl-[36%]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
+      <motion.h1 className="text-text pl-[35.5%]" {...animations.fadeIn()}>
         BOOK PDF
       </motion.h1>
     </div>

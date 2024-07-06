@@ -11,6 +11,7 @@ const Add = () => {
 
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    console.log("clicked");
   };
 
   return (
@@ -44,28 +45,6 @@ const Add = () => {
       >
         The Flow of Stories
       </motion.h1>
-
-      <motion.button
-        className="text-text text-xl absolute top-20 left-24"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={handleProfileClick}
-      >
-        <CgProfile size={40} />
-      </motion.button>
-      {isDropdownOpen && (
-        <div className="absolute left-[18%] top-36 bg-white border rounded-lg shadow-lg z-10">
-          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
-          <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
-          <div className="block px-4 py-2 hover:bg-gray-200">
-            <IoIosLogOut className="inline-block mr-2" /> Logout
-          </div>
-          <div className="block px-4 py-2 hover:bg-gray-200">
-            <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
-          </div>
-        </div>
-      )}
-
       <motion.div
         className="absolute inset-0 text-center flex flex-col justify-center items-center"
         initial={{ scale: 0 }}
@@ -98,6 +77,31 @@ const Add = () => {
           Nothing to see here :&#10088;
         </motion.h1>
       </motion.div>
+      <motion.button
+        className="text-text text-xl absolute top-20 left-32"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={handleProfileClick}
+      >
+        <CgProfile size={40} />
+      </motion.button>
+      {isDropdownOpen && (
+        <motion.div
+          className="absolute left-[13%] top-28 bg-white border rounded-lg shadow-lg z-10"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <IoIosLogOut className="inline-block mr-2" /> Logout
+          </div>
+          <div className="block px-4 py-2 hover:bg-gray-200">
+            <RiDeleteBin5Line className="inline-block mr-2" /> Delete Account
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 };
