@@ -43,12 +43,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let isValid = true;
 
-    if (isValid) {
-      alert("Login successfull!");
-      navigate("/newbooks");
-    }
+    alert("Login successfull!");
+    navigate("/newbooks");
   };
 
   return (

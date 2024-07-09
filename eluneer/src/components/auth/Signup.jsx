@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
+
 const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -43,12 +46,13 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let isValid = true;
+    axios
+      .post("http://localhost:3001/register", { name, email, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
 
-    if (isValid) {
-      alert("Signup successfully!");
-      navigate("/newbooks");
-    }
+    alert("Signup successfully!");
+    navigate("/login");
   };
 
   return (
@@ -108,13 +112,28 @@ const Signup = () => {
                 <div className="mb-4 text-text">
                   <label
                     className="block text-sm font-medium mb-2"
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    className="w-full px-3 py-2 rounded-lg bg-transparent border border-gray-300 focus:outline-none"
+                    placeholder="Enter your name"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4 text-text">
+                  <label
+                    className="block text-sm font-medium mb-2"
                     htmlFor="email"
                   >
                     Email
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    name="email"
                     className="w-full px-3 py-2 rounded-lg bg-transparent border border-gray-300 focus:outline-none"
                     placeholder="Enter your email"
                     value={email}
@@ -133,7 +152,7 @@ const Signup = () => {
                   </label>
                   <input
                     type="password"
-                    id="password"
+                    name="password"
                     className="w-full px-3 py-2 bg-transparent rounded-lg border border-gray-300 focus:outline-none"
                     placeholder="Enter your password"
                     value={password}
