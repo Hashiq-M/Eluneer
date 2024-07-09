@@ -1,4 +1,4 @@
-//to list every book
+//to list every book side by side
 import { useState, useEffect } from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
