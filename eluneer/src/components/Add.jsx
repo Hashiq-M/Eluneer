@@ -1,20 +1,36 @@
 //first page when logged in or signed up
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { RxPencil2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { IoIosLogOut } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import axios from "axios";
 
 const Add = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [name, setName] = useState("");
 
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
-    console.log("clicked");
   };
 
+  function fetchProfile() {
+    axios
+      .get("http://localhost:3001/fetchprofile", { withCredentials: true })
+      .then((result) => {
+        if (result.data.status === "success") {
+          setName(result.data.username);
+          console.log(result.data.username);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   return (
     <div className="bg-bg min-h-screen relative">
       <motion.div
@@ -93,7 +109,7 @@ const Add = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">{name}</div>
           <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
           <div className="block px-4 py-2 hover:bg-gray-200">
             <IoIosLogOut className="inline-block mr-2" /> Logout

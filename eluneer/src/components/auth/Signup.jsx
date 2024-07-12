@@ -48,11 +48,8 @@ const Signup = () => {
     e.preventDefault();
     axios
       .post("http://localhost:3001/register", { name, email, password })
-      .then((result) => console.log(result))
+      .then(alert("Signup successfully!"), navigate("/login"))
       .catch((err) => console.log(err));
-
-    alert("Signup successfully!");
-    navigate("/login");
   };
 
   return (

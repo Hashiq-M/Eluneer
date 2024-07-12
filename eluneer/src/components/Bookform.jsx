@@ -1,12 +1,13 @@
 //to get book input from user
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CgProfile } from "react-icons/cg";
 import { RxDoubleArrowLeft } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
-import { useState } from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import axios from "axios";
 
 const animations = {
   slideIn: (delay = 0) => ({
@@ -30,6 +31,7 @@ const Bookform = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [uploadedImageName, setUploadedImageName] = useState("");
   const [uploadedPdfName, setUploadedPdfName] = useState("");
+  const [name, setName] = useState("");
 
   const handleProfileClick = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -44,6 +46,22 @@ const Bookform = () => {
   };
 
   const handleSubmit = () => console.log("Form submitted!");
+
+  function fetchProfile() {
+    axios
+      .get("http://localhost:3001/fetchprofile", { withCredentials: true })
+      .then((result) => {
+        if (result.data.status === "success") {
+          setName(result.data.username);
+          console.log(result.data.username);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   return (
     <div className="bg-bg min-h-screen relative">
@@ -82,7 +100,7 @@ const Bookform = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="block px-4 py-2 hover:bg-gray-200">Username</div>
+          <div className="block px-4 py-2 hover:bg-gray-200">{name}</div>
           <div className="block px-4 py-2 hover:bg-gray-200">Library</div>
           <div className="block px-4 py-2 hover:bg-gray-200">
             <IoIosLogOut className="inline-block mr-2" /> Logout
@@ -105,30 +123,27 @@ const Bookform = () => {
             <div className="content z-10">
               <form>
                 {[
-                  { label: "BOOK ID :", id: "bookId", delay: 0.3 },
-                  { label: "TITLE :", id: "title", delay: 0.4 },
-                  { label: "AUTHOR :", id: "author", delay: 0.5 },
+                  { label: "BOOK ID :", name: "bookId", delay: 0.3 },
+                  { label: "TITLE :", name: "title", delay: 0.4 },
+                  { label: "AUTHOR :", name: "author", delay: 0.5 },
                   {
                     label: "PUBLICATION DATE :",
-                    id: "publicationDate",
+                    name: "publicationDate",
                     delay: 0.6,
                   },
-                  { label: "LANGUAGE:", id: "language", delay: 0.7 },
-                ].map((field) => (
+                  { label: "LANGUAGE:", name: "language", delay: 0.7 },
+                ].map((field, index) => (
                   <motion.div
                     className="mb-4 flex items-center"
                     {...animations.fadeIn(field.delay)}
-                    key={field.id}
+                    key={index}
                   >
-                    <label
-                      className="text-text text-lg mr-2 w-28"
-                      htmlFor={field.id}
-                    >
+                    <label className="text-text text-lg mr-2 w-28">
                       {field.label}
                     </label>
                     <input
                       type="text"
-                      id={field.id}
+                      name={field.name}
                       className="w-full px-3 py-2 bg-transparent rounded border-b border-dashed border-gray-300 focus:border-gray-400 focus:outline-none text-text text-lg"
                     />
                   </motion.div>
